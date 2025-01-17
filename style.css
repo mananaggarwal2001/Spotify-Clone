@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Butcherman&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Roboto", serif;
+}
+
+body {
+    background-color: black;
+    color: white;
+}
+
+/* left box decoration  */
+.left {
+    width: 25vw;
+}
+
+/* right box decoration */
+.right {
+    width: 75vw;
+}
+
+.left {
+    padding: 10px;
+}
+
+.library {
+    min-height: 80vh;
+    position: relative;
+}
+
+/* left home section start */
+.home ul li {
+    width: 14px;
+    list-style: none;
+    display: flex;
+    gap: 15px;
+    padding-top: 14px;
+    font-weight: bold;
+}
+
+/* Library part is going on. */
+.heading {
+    width: 100%;
+    list-style: none;
+    display: flex;
+    gap: 15px;
+    font-weight: bold;
+    align-items: center;
+    font-size: 10px;
+}
+
+.heading img {
+    width: 20px;
+}
+
+.footer {
+    display: flex;
+    font-size: 10px;
+    /* color: white; */
+    gap: 15px;
+    flex-wrap: wrap;
+    position: absolute;
+    bottom: 12px;
+
+}
+
+.footer a {
+    color: grey;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+.right {
+    margin: 16px 0;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    background-color:rgb(59, 59, 59);
+    /* padding:0 10px; */
+}
+
+.header>* {
+    padding: 20px;
+}
