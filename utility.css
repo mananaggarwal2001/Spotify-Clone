@@ -35,3 +35,42 @@
 .p-1{
     padding:10px;
 }
+
+/* For modern browsers supporting ::-webkit-scrollbar */
+/* For modern browsers supporting ::-webkit-scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+    /* Thin scrollbar */
+    height: 10px;
+    /* Thin horizontal scrollbar */
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #444;
+    /* Dark gray thumb */
+    border-radius: 10px;
+    /* Fully rounded scrollbar thumb */
+    border: 2px solid transparent;
+    /* Space between thumb and track */
+    background-clip: padding-box;
+    /* Ensures proper spacing for the thumb */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #666;
+    /* Slightly lighter gray on hover */
+}
+
+::-webkit-scrollbar-track {
+    background-color: #222;
+    /* Very dark background for the track */
+    border-radius: 10px;
+    /* Fully rounded track */
+    margin: 2px;
+    /* Optional: space between track and container edge */
+}
+
+::-webkit-scrollbar-corner {
+    background-color: #222;
+    /* Matches the track's color */
+}
