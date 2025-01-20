@@ -19,6 +19,7 @@ body {
 /* right box decoration */
 .right {
     width: 75vw;
+    position: relative;
 }
 
 .left {
@@ -84,7 +85,7 @@ body {
     display: flex;
     justify-content: space-between;
     background-color: rgb(59, 59, 59);
-    height:72px;
+    height: 72px;
     /* padding:0 10px; */
 }
 
@@ -190,4 +191,86 @@ body {
 
 .loginbtn:hover {
     font-weight: bold;
+}
+
+.playbar {
+    position: fixed;
+    background-color: rgb(208, 201, 201);
+    border-radius: 20px;
+    width: 70vw;
+    /* margin:auto; */
+    padding: 12px;
+    bottom: 30px;
+    right: 10px;
+    filter: invert(1);
+    height: 49px;
+}
+
+.songsbutton {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+}
+
+.songslist {
+    margin: 13px 0 44px 0;
+    height: 470px;
+    overflow: auto;
+}
+
+.songslist ul {
+    padding: 0 12px;
+    margin: 28px 0px;
+}
+
+.songslist ul li {
+    /* list-style-type: decimal; */
+    list-style: none;
+    display: flex;
+    gap: 10px;
+    cursor: pointer;
+    padding: 12px 8px;
+    border: 1px solid white;
+    margin: 12px 0;
+    border-radius: 12px;
+    justify-content: space-between;
+
+}
+
+.playNow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.songslist .info {
+    width: 344px;
+    font-size: 13px;
+}
+
+.playNow span {
+    font-size: 10px;
+    width: 50px;
+    padding: 12px;
+}
+
+.seekbar {
+    width: inherit;
+    height: 3px;
+    /* display: flex; */
+    border-radius: inherit;
+    background-color: black;
+    position: absolute;
+    bottom: 12px;
+}
+
+.circle {
+    width: 13px;
+    height: 13px;
+    border-radius: 13px;
+    background-color: black;
+    position: relative;
+    bottom:5.7px;
+    left:0%;
+    transition: left 0.5s;
 }
