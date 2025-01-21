@@ -256,12 +256,13 @@ body {
 
 .seekbar {
     width: inherit;
-    height: 3px;
+    height: 4px;
     /* display: flex; */
     border-radius: inherit;
     background-color: black;
     position: absolute;
     bottom: 12px;
+    cursor: pointer;
 }
 
 .circle {
@@ -270,7 +271,7 @@ body {
     border-radius: 13px;
     background-color: black;
     position: relative;
-    bottom: 5.7px;
+    bottom: 5.6px;
     left: 0%;
     transition: left 300ms;
 }
@@ -287,4 +288,16 @@ body {
 .songtitle,
 .songtime {
     color: black;
+}
+
+.logo img {
+    width: 100px;
+}
+
+.seekbarcover {
+    background-color: rgb(145, 0, 155);
+    width: 0;
+    transition: width 300ms;
+    height: inherit;
+    position: absolute;
 }

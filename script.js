@@ -31,13 +31,14 @@ const playMusic = (track, pause = false) => {
         currentSong.play()
         play.src = "/img/pause.svg"
     }
-    document.querySelector(".songtitle").innerHTML = decodeURI(track);
+    document.querySelector(".songtitle").innerHTML = decodeURI(track.split("320")[0]);
     document.querySelector(".songtime").innerHTML = "00:00 / 00:00";
 }
 async function main() {
     // fetch all the songs from the songs file.
     let songs = await getSongs()
-    playMusic(songs[0], true)
+    let value = Math.floor(Math.random() * songs.length);
+    playMusic(songs[value], true)
 
     // show all the songs in the library as in the form of list.
     let songsUL = document.querySelector(".songslist").getElementsByTagName("ul")[0]
@@ -74,10 +75,18 @@ async function main() {
         }
     })
     // Listen for the timeupdate event and this event will be running when the song is running.
-    currentSong.addEventListener("timeupdate", (e) => {
-        console.log(currentSong.duration, currentSong.currentTime)
+    currentSong.addEventListener("timeupdate", () => {
         document.querySelector(".songtime").innerHTML = `${formatSecondsToMinutes(currentSong.currentTime)}/${formatSecondsToMinutes(currentSong.duration)}`
         document.querySelector(".circle").style.left = currentSong.currentTime / currentSong.duration * 100 + "%"
+        document.querySelector(".seekbarcover").style.width = currentSong.currentTime / currentSong.duration * 100 + "%"
+    })
+
+    // Add an event listener to the seekbar for doing the work.
+    document.querySelector(".seekbar").addEventListener("click", (e) => {
+        let percent = (e.offsetX / e.target.getBoundingClientRect().width) * 100;
+        document.querySelector(".circle").style.left = percent + "%"
+        document.querySelector(".seekbarcover").style.width = percent + "%"
+        currentSong.currentTime = (currentSong.duration * percent) / 100; // this code is for changing the current time and duration according to the user clicking on the seekbar.
     })
 }
 main()
