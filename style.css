@@ -270,7 +270,21 @@ body {
     border-radius: 13px;
     background-color: black;
     position: relative;
-    bottom:5.7px;
-    left:0%;
-    transition: left 0.5s;
+    bottom: 5.7px;
+    left: 0%;
+    transition: left 300ms;
+}
+
+.songsbutton img {
+    cursor: pointer;
+}
+
+.abovebar {
+    display: flex;
+    justify-content: space-between;
+}
+
+.songtitle,
+.songtime {
+    color: black;
 }
