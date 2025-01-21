@@ -46,7 +46,7 @@ async function main() {
         songsUL.innerHTML = songsUL.innerHTML + ` <li>
                             <img class="invert" src="img/music.svg" alt="">
                             <div class="info">
-                                <div>${song.replaceAll("%20", " ")}</div>
+                                <div>${decodeURI(song)}</div>
                                 <div>Manan</div>
                             </div>
                             <div class="playNow">
@@ -78,12 +78,12 @@ async function main() {
     currentSong.addEventListener("timeupdate", () => {
         document.querySelector(".songtime").innerHTML = `${formatSecondsToMinutes(currentSong.currentTime)}/${formatSecondsToMinutes(currentSong.duration)}`
         document.querySelector(".circle").style.left = currentSong.currentTime / currentSong.duration * 100 + "%"
-        document.querySelector(".seekbarcover").style.width = currentSong.currentTime / currentSong.duration * 100 + "%"
+        document.querySelector(".seekbarcover").style.width = currentSong.currentTime / currentSong.duration * 100 + "%";
     })
 
     // Add an event listener to the seekbar for doing the work.
     document.querySelector(".seekbar").addEventListener("click", (e) => {
-        let percent = (e.offsetX / e.target.getBoundingClientRect().width) * 100;
+        let percent = (e.offsetX / e.target.getBoundingClientRect().width) * 100; // this for calculating the length of the seekhbar and how much seekh baar will be covered when the mouse click is done on that seekhbaar.
         document.querySelector(".circle").style.left = percent + "%"
         document.querySelector(".seekbarcover").style.width = percent + "%"
         currentSong.currentTime = (currentSong.duration * percent) / 100; // this code is for changing the current time and duration according to the user clicking on the seekbar.
