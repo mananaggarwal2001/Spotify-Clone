@@ -14,26 +14,31 @@
 .items-center {
     align-items: center;
 }
-.bg-black{
+
+.bg-black {
     background-color: black;
-    color:white;
+    color: white;
 }
-.invert{
+
+.invert {
     filter: invert(1);
 }
 
-.bg-grey{
+.bg-grey {
     background-color: #1f1f1f;
-    color:white;
+    color: white;
 }
-.rounded{
+
+.rounded {
     border-radius: 7px;
 }
-.m-1{
-    margin:5px;
+
+.m-1 {
+    margin: 5px;
 }
-.p-1{
-    padding:10px;
+
+.p-1 {
+    padding: 10px;
 }
 
 /* For modern browsers supporting ::-webkit-scrollbar */
@@ -73,4 +78,13 @@
 ::-webkit-scrollbar-corner {
     background-color: #222;
     /* Matches the track's color */
+}
+
+.imagewidth {
+    width: 23px;
+    padding-top: 12px;
+}
+
+.invertreverse {
+    filter: invert(0)
 }

@@ -25,22 +25,31 @@ function formatSecondsToMinutes(seconds) {
     return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
 }
 
-const playMusic = (track, pause = false) => {
+const playMusic = (track, index, pause = false) => {
     currentSong.src = "/songs/" + track
     if (!pause) {
         currentSong.play()
         play.src = "/img/pause.svg"
     }
+    // this code is for highlighting the box with the different color when that song is in the playing stage.
+    Array.from(document.querySelector(".songslist").getElementsByTagName("li")).forEach((element) => {
+        if (decodeURI(currentSong.src.split("/songs/")[1]) !== element.querySelector(".info").firstElementChild.innerHTML) {
+            element.style.borderColor = "white"
+            element.firstElementChild.classList.remove("imagewidth")
+            element.firstElementChild.src = "/img/music.svg"
+        } else {
+            element.style.borderColor = "green"
+            element.firstElementChild.src = "/gifs/spotify.gif"
+            element.firstElementChild.classList.add("imagewidth")
+            console.log(element.firstElementChild.classList)
+        }
+    })
     document.querySelector(".songtitle").innerHTML = decodeURI(track.split("320")[0]);
     document.querySelector(".songtime").innerHTML = "00:00 / 00:00";
 }
 async function main() {
     // fetch all the songs from the songs file.
     let songs = await getSongs()
-    let value = Math.floor(Math.random() * songs.length);
-    playMusic(songs[value], true)
-
-    // show all the songs in the library as in the form of list.
     let songsUL = document.querySelector(".songslist").getElementsByTagName("ul")[0]
     for (const song of songs) {
         songsUL.innerHTML = songsUL.innerHTML + ` <li>
@@ -55,10 +64,14 @@ async function main() {
                             </div>
                         </li>`
     }
+    let value = Math.floor(Math.random() * songs.length);
+    playMusic(songs[value], value, true)
+
+    // show all the songs in the library as in the form of list.
     // Attach an event Listener to each song
-    Array.from(document.querySelector(".songslist").getElementsByTagName("li")).forEach(element => {
+    Array.from(document.querySelector(".songslist").getElementsByTagName("li")).forEach((element, index) => {
         element.addEventListener("click", (result) => {
-            playMusic(element.querySelector(".info").firstElementChild.innerHTML)
+            playMusic(element.querySelector(".info").firstElementChild.innerHTML, index)
         })
     })
 
