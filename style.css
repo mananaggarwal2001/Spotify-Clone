@@ -108,6 +108,7 @@ body {
     border-radius: 5px;
     background-color: transparent;
     position: relative;
+    cursor: pointer;
 }
 
 .card>* {
@@ -339,7 +340,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap:13px;
+    gap: 13px;
 }
 
 .volume {
@@ -347,6 +348,7 @@ body {
     justify-content: center;
     align-items: center;
     gap: 10px;
+    cursor: pointer;
 }
 
 @media screen and (max-width:1400px) {
@@ -359,7 +361,8 @@ body {
         background-color: black;
         padding: 0;
     }
-    .timevolume{
+
+    .timevolume {
         flex-direction: column;
 
     }

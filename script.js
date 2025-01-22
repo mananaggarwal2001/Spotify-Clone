@@ -1,8 +1,10 @@
 console.log("This is the class for doing the work....")
 let currentSong = new Audio()
 let songs;
-async function getSongs() {
-    let a = await fetch("/songs");
+let currFolder;
+async function getSongs(folder) {
+    currFolder = folder;
+    let a = await fetch(`/${folder}/`);
     let finalresult = await a.text(); // the songs folder can be fetched and converted into the text only.
     let div = document.createElement("div")
     div.innerHTML = finalresult
@@ -11,47 +13,12 @@ async function getSongs() {
     for (let i = 0; i < songslist.length; i++) {
         const element = songslist[i]
         if (element.href.endsWith(".mp3")) {
-            songs.push(element.href.split("/songs/")[1])
+            songs.push(element.href.split(`/${folder}/`)[1])
         }
     }
-    return songs
-}
 
-function formatSecondsToMinutes(seconds) {
-    if (isNaN(seconds) || seconds < 0) {
-        return "00:00";
-    }
-    const minutes = Math.floor(seconds / 60); // Get the number of full minutes
-    const remainingSeconds = Math.floor(seconds % 60); // Get the remaining seconds
-    return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
-}
-
-const playMusic = (track, index, pause = false) => {
-    currentSong.src = "/songs/" + track
-    if (!pause) {
-        currentSong.play()
-        play.src = "/img/pause.svg"
-    }
-    // this code is for highlighting the box with the different color when that song is in the playing stage.
-    Array.from(document.querySelector(".songslist").getElementsByTagName("li")).forEach((element) => {
-        if (decodeURI(currentSong.src.split("/songs/")[1]) !== element.querySelector(".info").firstElementChild.innerHTML) {
-            element.style.borderColor = "white"
-            element.firstElementChild.classList.remove("imagewidth")
-            element.firstElementChild.src = "/img/music.svg"
-        } else {
-            element.style.borderColor = "green"
-            element.firstElementChild.src = "/gifs/spotify.gif"
-            element.firstElementChild.classList.add("imagewidth")
-            console.log(element.firstElementChild.classList)
-        }
-    })
-    document.querySelector(".songtitle").innerHTML = decodeURI(track.split("320")[0]);
-    document.querySelector(".songtime").innerHTML = "00:00 / 00:00";
-}
-async function main() {
-    // fetch all the songs from the songs file.
-    songs = await getSongs()
     let songsUL = document.querySelector(".songslist").getElementsByTagName("ul")[0]
+    songsUL.innerHTML = ""
     for (const song of songs) {
         songsUL.innerHTML = songsUL.innerHTML + ` <li>
                             <img class="invert" src="img/music.svg" alt="">
@@ -65,16 +32,114 @@ async function main() {
                             </div>
                         </li>`
     }
-    let value = Math.floor(Math.random() * songs.length);
-    playMusic(songs[value], value, true)
 
-    // show all the songs in the library as in the form of list.
     // Attach an event Listener to each song
     Array.from(document.querySelector(".songslist").getElementsByTagName("li")).forEach((element, index) => {
         element.addEventListener("click", (result) => {
             playMusic(element.querySelector(".info").firstElementChild.innerHTML, index)
         })
     })
+    return songs
+}
+
+function formatSecondsToMinutes(seconds) {
+    if (isNaN(seconds) || seconds < 0) {
+        return "00:00";
+    }
+    const minutes = Math.floor(seconds / 60); // Get the number of full minutes
+    const remainingSeconds = Math.floor(seconds % 60); // Get the remaining seconds
+    return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
+}
+
+const playMusic = (track, index, pause = false) => {
+    currentSong.src = `/${currFolder}/` + track
+    if (!pause) {
+        currentSong.play()
+        play.src = "/img/pause.svg"
+    }
+    // this code is for highlighting the box with the different color when that song is in the playing stage.
+    Array.from(document.querySelector(".songslist").getElementsByTagName("li")).forEach((element) => {
+        if (decodeURI(currentSong.src.split(`/${currFolder}/`)[1]) !== element.querySelector(".info").firstElementChild.innerHTML) {
+            element.style.borderColor = "white"
+            element.firstElementChild.classList.remove("imagewidth")
+            element.firstElementChild.src = "/img/music.svg"
+        } else {
+            element.style.borderColor = "green"
+            element.firstElementChild.src = "/gifs/spotify.gif"
+            element.firstElementChild.classList.add("imagewidth")
+        }
+    })
+    document.querySelector(".songtitle").innerHTML = decodeURI(track.split("320")[0]);
+    document.querySelector(".songtime").innerHTML = "00:00 / 00:00";
+}
+async function displayAlbums() {
+    let a = await fetch("/songs")
+    let finalresult = await a.text()
+    let div = document.createElement("div")
+    let cardContainers = document.querySelector(".cardcontainer")
+    div.innerHTML = finalresult;
+    let anchors = Array.from(div.getElementsByTagName("a"))
+    for (let i = 0; i < anchors.length; i++) {
+        let element = anchors[i]
+        if (element.href.includes("/songs")) {
+            let value = element.href.split("/").slice(-2)[0]
+            let finalvalue = await fetch(`/songs/${value}/info.json`)
+            let finalresult = await finalvalue.json()
+            cardContainers.innerHTML = cardContainers.innerHTML + `
+            <div data-folder="${value}" class="card">
+                        <div class="play">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5 20V4L19 12L5 20Z" stroke="#141B34" fill="#000" stroke-width="1.5"
+                                    stroke-linejoin="round"></path>
+                            </svg>
+                        </div>
+                        <img src="/songs/${value}/cover.jpg" alt="">
+                        <h2>${finalresult.title}</h2>
+                        <p>${finalresult.description}</p>
+                    </div>
+                    `
+        }
+    }
+    // Load the playlist whenever the card is clicked.
+    Array.from(document.getElementsByClassName("card")).forEach(element => {
+        element.addEventListener("click", async () => {
+            songs = await getSongs(`songs/${element.dataset.folder}`)
+        })
+    })
+}
+async function main() {
+    // fetch all the songs from the songs file.
+    songs = await getSongs("songs/cs")
+    // this folder is moved in the getsongs folder and for doing further work.
+    // let songsUL = document.querySelector(".songslist").getElementsByTagName("ul")[0]
+    // for (const song of songs) {
+    //     songsUL.innerHTML = songsUL.innerHTML + ` <li>
+    //                         <img class="invert" src="img/music.svg" alt="">
+    //                         <div class="info">
+    //                             <div>${decodeURI(song)}</div>
+    //                             <div>Manan</div>
+    //                         </div>
+    //                         <div class="playNow">
+    //                             <span>Play Now</span>
+    //                             <img class="invert" src="img/play.svg" alt="">
+    //                         </div>
+    //                     </li>`
+    // }
+    let value = Math.floor(Math.random() * songs.length);
+    playMusic(songs[value], value, true)
+
+
+    // display all the albums on the page.
+    displayAlbums()
+
+    // show all the songs in the library as in the form of list.
+    // // Attach an event Listener to each song
+    // Array.from(document.querySelector(".songslist").getElementsByTagName("li")).forEach((element, index) => {
+    //     element.addEventListener("click", (result) => {
+    //         playMusic(element.querySelector(".info").firstElementChild.innerHTML, index)
+    //     })
+    // })
 
     // Attach the event listener to the play, next and previous
     // paused is not the function it is a variable
@@ -156,7 +221,6 @@ async function main() {
     toggleVolumeImage.addEventListener("click", () => {
         let inputRangeValue = document.querySelector(".volume").getElementsByTagName("input")[0]
         let valueImage = toggleVolumeImage.src.split("/img/")[1]
-        console.log(inputRangeValue)
         if (valueImage === "volume.svg") {
             currentVolume = currentSong.volume;
             toggleVolumeImage.src = "img/mute.svg";
@@ -168,5 +232,6 @@ async function main() {
             inputRangeValue.value = 50;
         }
     })
+
 }
 main()
