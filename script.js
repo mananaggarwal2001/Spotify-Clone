@@ -95,12 +95,21 @@ async function main() {
         document.querySelector(".seekbarcover").style.width = currentSong.currentTime / currentSong.duration * 100 + "%";
     })
 
-    // Add an event listener to the seekbar for doing the work.
+    // // Add an event listener to the seekbar for doing the work.
     document.querySelector(".seekbar").addEventListener("click", (e) => {
         let percent = (e.offsetX / e.target.getBoundingClientRect().width) * 100; // this for calculating the length of the seekhbar and how much seekh baar will be covered when the mouse click is done on that seekhbaar.
         document.querySelector(".circle").style.left = percent + "%"
         document.querySelector(".seekbarcover").style.width = percent + "%"
         currentSong.currentTime = (currentSong.duration * percent) / 100; // this code is for changing the current time and duration according to the user clicking on the seekbar.
+    })
+    // Add an event listener to the seekbar for doing the work.
+    document.querySelector(".seekbar").addEventListener("mousemove", (e) => {
+        if (e.buttons === 1) {
+            let percent = (e.offsetX / e.target.getBoundingClientRect().width) * 100; // this for calculating the length of the seekhbar and how much seekh baar will be covered when the mouse click is done on that seekhbaar.
+            document.querySelector(".circle").style.left = percent + "%"
+            document.querySelector(".seekbarcover").style.width = percent + "%"
+            currentSong.currentTime = (currentSong.duration * percent) / 100; // this code is for changing the current time and duration according to the user clicking on the seekbar.
+        }
     })
 
     // add an event listener for the hamburger for visiblity of the left pane.
@@ -128,6 +137,18 @@ async function main() {
             playMusic(songs[index + 1])
         }
     })
-
+    // Add an event to the volume
+    let element = document.querySelector(".volume").getElementsByTagName("input")[0]
+    element.addEventListener("mousemove", (event) => {
+        if (event.buttons === 1) {
+            currentSong.volume = parseInt(event.target.value) / 100;
+            let value = document.querySelector(".volume").getElementsByTagName("img")[0]
+            if (parseInt(event.target.value) === 0) {
+                value.src = "img/mute.svg"
+            } else {
+                value.src = "img/volume.svg"
+            }
+        }
+    })
 }
 main()

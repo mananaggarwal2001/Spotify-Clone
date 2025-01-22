@@ -335,6 +335,20 @@ body {
     position: absolute;
 }
 
+.timevolume {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap:13px;
+}
+
+.volume {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
 @media screen and (max-width:1400px) {
     .left {
         position: absolute;
@@ -344,6 +358,10 @@ body {
         width: 373px;
         background-color: black;
         padding: 0;
+    }
+    .timevolume{
+        flex-direction: column;
+
     }
 
     .left .close {
@@ -401,7 +419,7 @@ body {
         align-items: center;
         justify-content: center;
         gap: 13px;
-        margin-bottom: 29px;
+        margin-bottom: 49px;
         margin-top: 12px;
         font-size: 1rem;
         height: 100px;
