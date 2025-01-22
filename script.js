@@ -150,5 +150,23 @@ async function main() {
             }
         }
     })
+
+    // toggle the volume icon button for chaging the value to mute or present value.
+    let toggleVolumeImage = document.querySelector(".volume").getElementsByTagName("img")[0]
+    toggleVolumeImage.addEventListener("click", () => {
+        let inputRangeValue = document.querySelector(".volume").getElementsByTagName("input")[0]
+        let valueImage = toggleVolumeImage.src.split("/img/")[1]
+        console.log(inputRangeValue)
+        if (valueImage === "volume.svg") {
+            currentVolume = currentSong.volume;
+            toggleVolumeImage.src = "img/mute.svg";
+            currentSong.volume = 0;
+            inputRangeValue.value = 0
+        } else {
+            toggleVolumeImage.src = "img/volume.svg";
+            currentSong.volume = 0.5;
+            inputRangeValue.value = 50;
+        }
+    })
 }
 main()
