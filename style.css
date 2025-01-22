@@ -203,7 +203,8 @@ body {
     bottom: 30px;
     right: 10px;
     filter: invert(1);
-    height: 49px;
+    min-height: 49px;
+    font-weight: bold;
 }
 
 .songsbutton {
@@ -248,6 +249,10 @@ body {
     font-size: 13px;
 }
 
+.info div {
+    word-break: break-all;
+}
+
 .playNow span {
     font-size: 10px;
     width: 50px;
@@ -269,12 +274,12 @@ body {
     display: none;
 }
 
- .hamburgerContainer {
-     display: flex;
-     justify-content: center;
-     align-items: center;
-     gap: 13px;
- }
+.hamburgerContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 13px;
+}
 
 
 .circle {
@@ -295,11 +300,27 @@ body {
 .abovebar {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    height: 50px;
+    margin-bottom: 13px;
 }
 
 .songtitle,
 .songtime {
     color: black;
+
+}
+
+.songtitle {
+    width: 250px;
+}
+
+.songtime {
+    width: 100px;
+}
+
+.close {
+    display: none;
 }
 
 .logo img {
@@ -317,29 +338,83 @@ body {
 @media screen and (max-width:1400px) {
     .left {
         position: absolute;
-        left: -100%;
+        left: -120%;
         transition: all .3s;
         z-index: 3;
-        width: 433px;
+        width: 373px;
         background-color: black;
+        padding: 0;
+    }
+
+    .left .close {
+        display: block;
+        position: absolute;
+        right: 25px;
     }
 
     .right {
         width: 100vw;
+        height: calc(100vh - 5px);
+    }
+
+    .spotifyPlaylist h1 {
+        display: block;
+        text-align: center;
     }
 
     .playbar {
-        width: 95vw;
+        width: calc(100vw - 50px);
+        left: 15px;
+        font-size: 16px;
+    }
+
+    .songtitle,
+    .songtime {
+        width: auto;
+        text-align: center;
+    }
+
+    .seekbar {
+        width: inherit;
+        margin-top: 130px;
     }
 
     .songsbutton {
-        display: inline-flex;
+        display: flex;
+    }
+
+    .songsbutton img {
+        min-width: 40px;
+    }
+
+    .cardcontainer {
+        justify-content: center;
+        margin: 0;
+    }
+
+    .card {
+        width: 100vw;
+    }
+
+    .abovebar {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 13px;
+        margin-bottom: 29px;
+        margin-top: 12px;
+        font-size: 1rem;
+        height: 100px;
     }
 
     .hamburger {
         display: block;
         width: 30px;
         height: 30px;
+    }
+
+    .spotifyPlaylist h1 {
+        padding: 16px 0;
     }
 
 }
