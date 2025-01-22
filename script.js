@@ -101,5 +101,10 @@ async function main() {
         document.querySelector(".seekbarcover").style.width = percent + "%"
         currentSong.currentTime = (currentSong.duration * percent) / 100; // this code is for changing the current time and duration according to the user clicking on the seekbar.
     })
+
+    // add an event listener for the hamburger for visiblity of the left pane.
+    document.querySelector(".hamburger").addEventListener("click", () => {
+        document.querySelector(".left").style.left = 0;
+    })
 }
 main()
