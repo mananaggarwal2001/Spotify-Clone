@@ -357,13 +357,17 @@ body {
 
 @media screen and (max-width:1400px) {
     .left {
-        position: absolute;
+        position: fixed;
+        top:0;
         left: -120%;
         transition: all .3s;
         z-index: 3;
         width: 373px;
         background-color: black;
         padding: 0;
+    }
+    .abovebar{
+        padding-top:13px;
     }
 
     .timevolume {
@@ -443,7 +447,7 @@ body {
         padding: 16px 0;
     }
     .card:last-child{
-        padding-bottom: 20vh;
+        margin-bottom: 10vh;
     }
 
 }
@@ -456,6 +460,7 @@ body {
 
     .left {
         left: -133%;
+        width:100vw;
     }
 
     .cardcontainer {}
