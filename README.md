@@ -8,4 +8,4 @@
 3. Previous and next button for playing the previous and next song displyed in the list of songs.
 4. Dynamic Album loading as per the user click on the album that list of songs will be loaded in the playlist which is show in the left of the application.
 #### Screenshots
-![alt text](image.png)
+![alt text](image-1.png)
