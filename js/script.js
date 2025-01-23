@@ -59,14 +59,18 @@ const playMusic = (track, index, pause = false) => {
     }
     // this code is for highlighting the box with the different color when that song is in the playing stage.
     Array.from(document.querySelector(".songslist").getElementsByTagName("li")).forEach((element) => {
+        let value = element.querySelector(".playNow").lastElementChild
+        console.log(value)
         if (decodeURI(currentSong.src.split(`/${currFolder}/`)[1]) !== element.querySelector(".info").firstElementChild.innerHTML) {
             element.style.borderColor = "white"
             element.firstElementChild.classList.remove("imagewidth")
             element.firstElementChild.src = "/img/music.svg"
+            value.src="/img/play.svg"
         } else {
             element.style.borderColor = "green"
             element.firstElementChild.src = "/gifs/spotify.gif"
             element.firstElementChild.classList.add("imagewidth")
+            value.src = "/img/pause.svg"
         }
     })
     document.querySelector(".songtitle").innerHTML = decodeURI(track.split("320")[0]);
@@ -105,6 +109,7 @@ async function displayAlbums() {
     Array.from(document.getElementsByClassName("card")).forEach(element => {
         element.addEventListener("click", async () => {
             songs = await getSongs(`songs/${element.dataset.folder}`)
+            playMusic(songs[0])
         })
     })
 }
