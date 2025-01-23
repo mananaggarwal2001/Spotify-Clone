@@ -363,6 +363,7 @@ body {
         transition: all .3s;
         z-index: 3;
         width: 373px;
+        height:100vh;
         background-color: black;
         padding: 0;
     }
