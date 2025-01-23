@@ -31,6 +31,10 @@ body {
     position: relative;
 }
 
+.hamburger {
+    cursor: pointer;
+}
+
 /* left home section start */
 .home ul li {
     width: 14px;
@@ -415,6 +419,7 @@ body {
 
     .card {
         width: 100vw;
+        transition: all 0.5s;
     }
 
     .abovebar {
@@ -437,5 +442,29 @@ body {
     .spotifyPlaylist h1 {
         padding: 16px 0;
     }
+    .card:last-child{
+        padding-bottom: 20vh;
+    }
 
+}
+
+@media screen and (max-width:500px) {
+    .header>* {
+        padding: 0;
+        padding-top: 20px;
+    }
+
+    .left {
+        left: -133%;
+    }
+
+    .cardcontainer {}
+
+    .card {
+        width: 60vw;
+    }
+
+    .playbar {
+        right: 25px;
+    }
 }
