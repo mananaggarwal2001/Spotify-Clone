@@ -14,3 +14,4 @@ The features of this project are as follows:
 ## Screenshots
 
 ![alt text](image-1.png)
+#### For Live [Click Here](https://myspotifyclonesuper.freewebhostmost.com/)
