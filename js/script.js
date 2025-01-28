@@ -163,6 +163,11 @@ async function main() {
         document.querySelector(".songtime").innerHTML = `${formatSecondsToMinutes(currentSong.currentTime)} / ${formatSecondsToMinutes(currentSong.duration)}`
         document.querySelector(".circle").style.left = currentSong.currentTime / currentSong.duration * 100 + "%"
         document.querySelector(".seekbarcover").style.width = currentSong.currentTime / currentSong.duration * 100 + "%";
+        if (currentSong.currentTime === currentSong.duration) {
+            document.querySelector(".seekbarcover").style.width = 0;
+            currentSong.currentTime = 0;
+            play.src = "/img/play.svg"
+        }
     })
 
     // // Add an event listener to the seekbar for doing the work.
